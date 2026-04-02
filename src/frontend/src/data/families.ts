@@ -40,7 +40,7 @@ export const families: Family[] = [
     name: "Underwater Mafia",
     tag: "underwater-mafia",
     leader: "Micheal Kesari",
-    houseLocation: "Yuzhny No. 227",
+    houseLocation: "Yuzhny No. 291",
     about:
       "A silent but dangerous force that moves strategically and strikes with precision.",
     tagline: "Silent Depths, Deadly Power.",

@@ -5,7 +5,9 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
+  useRouterState,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
@@ -18,12 +20,22 @@ import Media from "./pages/Media";
 import Members from "./pages/Members";
 import Rules from "./pages/Rules";
 
+function ScrollToTop() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top on every route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+}
+
 function RootLayout() {
   return (
     <div
       className="flex flex-col min-h-screen"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
+      <ScrollToTop />
       <Navbar />
       <div className="flex-1">
         <Outlet />
