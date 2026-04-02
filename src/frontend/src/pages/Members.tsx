@@ -1,23 +1,15 @@
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import FamilyCard from "../components/FamilyCard";
 import SectionReveal from "../components/SectionReveal";
 import { families } from "../data/families";
 
 export default function Members() {
-  const [query, setQuery] = useState("");
-
-  const filtered = families.filter((f) =>
-    f.name.toLowerCase().includes(query.toLowerCase()),
-  );
+  const navigate = useNavigate();
 
   return (
     <main className="min-h-screen animate-page-enter">
       {/* Dark hero header */}
-      <div
-        className="relative py-20 px-6 text-center overflow-hidden"
-        style={{ marginTop: "64px" }}
-      >
+      <div className="relative pt-28 pb-20 px-6 text-center overflow-hidden">
         <div className="aurora-bg">
           <div className="animated-mesh-bg absolute inset-0" />
           <div className="aurora-blob aurora-blob-1" />
@@ -46,63 +38,28 @@ export default function Members() {
             ALLIANCE MEMBERS
           </h1>
           <p className="text-slate-400 max-w-lg mx-auto">
-            All families standing under the DPSP Alliance banner.
+            All families standing under the DPSP Alliance banner. Click any
+            family to view its details.
           </p>
-          <p className="text-xs font-medium text-slate-500 mt-2">8 Families</p>
+          <p className="text-xs font-medium text-slate-500 mt-2">9 Families</p>
         </SectionReveal>
       </div>
 
       {/* Light content area */}
       <div className="py-12 px-6" style={{ background: "#f8fafc" }}>
         <div className="max-w-7xl mx-auto">
-          <SectionReveal className="max-w-md mx-auto mb-12">
-            <div className="relative">
-              <svg
-                aria-hidden="true"
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748b] w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="8" strokeWidth="2" />
-                <path
-                  d="M21 21l-4.35-4.35"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <Input
-                placeholder="Search by name\u2026"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="pl-10 bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#64748b] focus:border-[#2563eb] h-11"
-                data-ocid="members.search_input"
+          <SectionReveal className="flex flex-wrap gap-3 justify-center">
+            {families.map((family, i) => (
+              <FamilyCard
+                key={family.tag}
+                family={family}
+                index={i}
+                onClick={() =>
+                  navigate({ to: "/family/$tag", params: { tag: family.tag } })
+                }
               />
-            </div>
+            ))}
           </SectionReveal>
-
-          {filtered.length === 0 ? (
-            <div
-              className="text-center py-20 text-[#64748b]"
-              data-ocid="members.empty_state"
-            >
-              <p className="text-lg">
-                No families found for &ldquo;{query}&rdquo;
-              </p>
-            </div>
-          ) : (
-            <SectionReveal className="flex flex-wrap gap-3 justify-center">
-              {filtered.map((family, i) => (
-                <FamilyCard key={family.tag} family={family} index={i} />
-              ))}
-            </SectionReveal>
-          )}
-
-          {filtered.length > 0 && (
-            <p className="text-center text-xs text-[#64748b] mt-10">
-              Showing {filtered.length} of {families.length} families
-            </p>
-          )}
         </div>
       </div>
     </main>

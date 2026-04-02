@@ -1,73 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
 import SectionReveal from "../components/SectionReveal";
-import { useActor } from "../hooks/useActor";
 
-interface FormState {
-  name: string;
-  discordUsername: string;
-  inGameName: string;
-  experience: string;
-  whyJoin: string;
+const DISCORD_LINK = "https://discord.gg/pSe6WWSE4";
+
+function DiscordIcon({ size = 32 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="white"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Discord"
+      role="img"
+    >
+      <title>Discord</title>
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+    </svg>
+  );
 }
 
-const initial: FormState = {
-  name: "",
-  discordUsername: "",
-  inGameName: "",
-  experience: "",
-  whyJoin: "",
-};
-
 export default function JoinUs() {
-  const { actor } = useActor();
-  const [form, setForm] = useState<FormState>(initial);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-
-  const update =
-    (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (Object.values(form).some((v) => !v.trim())) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (!actor) {
-      setError("Connection not ready. Please try again.");
-      return;
-    }
-    setLoading(true);
-    try {
-      await actor.submitJoinApplication(
-        form.name.trim(),
-        form.discordUsername.trim(),
-        form.inGameName.trim(),
-        form.experience.trim(),
-        form.whyJoin.trim(),
-      );
-      setSuccess(true);
-      setForm(initial);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <main className="min-h-screen pt-20 animate-page-enter">
-      {/* Dark header */}
-      <div className="relative py-20 px-6 text-center overflow-hidden">
+    <main className="min-h-screen animate-page-enter">
+      {/* Dark header — starts at top, behind navbar */}
+      <div className="relative pt-28 pb-20 px-6 text-center overflow-hidden">
         <div className="aurora-bg">
           <div className="animated-mesh-bg absolute inset-0" />
           <div className="aurora-blob aurora-blob-1" />
@@ -83,7 +39,7 @@ export default function JoinUs() {
         />
         <SectionReveal className="relative z-10">
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#38bdf8] mb-4">
-            Applications Open
+            Join the Community
           </p>
           <h1
             className="text-4xl sm:text-5xl font-black text-white uppercase mb-4"
@@ -92,165 +48,61 @@ export default function JoinUs() {
             JOIN THE ALLIANCE
           </h1>
           <p className="text-slate-400 max-w-lg mx-auto">
-            Ready to prove your worth? Submit your application and become part
-            of DPSP.
+            Ready to be part of DPSP? Click below to join our Discord server and
+            connect with the community.
           </p>
         </SectionReveal>
       </div>
 
-      {/* Light form area */}
+      {/* Discord CTA area */}
       <div
-        className="max-w-2xl mx-auto px-6 py-16"
+        className="max-w-xl mx-auto px-6 py-20 flex flex-col items-center gap-6"
         style={{ background: "#f8fafc" }}
       >
-        <SectionReveal>
-          {success ? (
+        <SectionReveal className="w-full">
+          <div
+            className="rounded-2xl p-10 flex flex-col items-center gap-6 text-center"
+            style={{
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 4px 24px rgba(37,99,235,0.07)",
+            }}
+          >
+            {/* Discord icon */}
             <div
-              className="rounded-2xl p-10 text-center"
-              style={{
-                background: "#f0fdf4",
-                border: "1px solid #bbf7d0",
-              }}
-              data-ocid="join.success_state"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center"
+              style={{ background: "#5865F2" }}
             >
-              <div className="text-5xl mb-4">✅</div>
-              <h2 className="text-2xl font-bold text-[#0f172a] mb-2">
-                Application Submitted!
-              </h2>
-              <p className="text-[#64748b] mb-6">
-                Your application has been received. A leader will reach out to
-                you on Discord soon.
-              </p>
-              <button
-                type="button"
-                onClick={() => setSuccess(false)}
-                className="btn-outline-ghost text-sm"
-              >
-                Submit Another
-              </button>
+              <DiscordIcon size={32} />
             </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-2xl p-8 space-y-6"
-              style={{
-                background: "#ffffff",
-                border: "1px solid #e2e8f0",
-              }}
-              data-ocid="join.modal"
-            >
+
+            <div>
               <h2
-                className="text-xl font-bold text-[#0f172a] mb-1"
+                className="text-2xl font-black text-[#0f172a] mb-2"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
-                Alliance Application
+                Join Our Discord Server
               </h2>
-              <p className="text-[#64748b] text-sm">
-                Fill out the form below. All fields are required.
+              <p className="text-[#64748b] text-sm max-w-xs mx-auto">
+                Connect with alliance members, stay updated on events, and
+                become part of the DPSP community.
               </p>
+            </div>
 
-              {error && (
-                <div
-                  className="rounded-xl px-4 py-3 text-sm text-red-600"
-                  style={{
-                    background: "#fef2f2",
-                    border: "1px solid #fecaca",
-                  }}
-                  data-ocid="join.error_state"
-                >
-                  {error}
-                </div>
-              )}
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <Label className="text-[#64748b] text-xs font-medium">
-                    Full Name
-                  </Label>
-                  <Input
-                    value={form.name}
-                    onChange={update("name")}
-                    placeholder="Your name"
-                    className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb]"
-                    data-ocid="join.input"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-[#64748b] text-xs font-medium">
-                    Discord Username
-                  </Label>
-                  <Input
-                    value={form.discordUsername}
-                    onChange={update("discordUsername")}
-                    placeholder="user#0000"
-                    className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb]"
-                    data-ocid="join.input"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-[#64748b] text-xs font-medium">
-                  In-Game Name
-                </Label>
-                <Input
-                  value={form.inGameName}
-                  onChange={update("inGameName")}
-                  placeholder="Your in-game name"
-                  className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb]"
-                  data-ocid="join.input"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-[#64748b] text-xs font-medium">
-                  Experience
-                </Label>
-                <Textarea
-                  value={form.experience}
-                  onChange={update("experience")}
-                  placeholder="Describe your gaming experience, previous alliances, skills..."
-                  rows={3}
-                  className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb] resize-none"
-                  data-ocid="join.textarea"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-[#64748b] text-xs font-medium">
-                  Why Do You Want to Join DPSP?
-                </Label>
-                <Textarea
-                  value={form.whyJoin}
-                  onChange={update("whyJoin")}
-                  placeholder="Tell us why you want to be part of DPSP Alliance Community..."
-                  rows={4}
-                  className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb] resize-none"
-                  data-ocid="join.textarea"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full h-11 font-semibold text-sm"
-                style={{
-                  background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
-                  color: "#fff",
-                }}
-                data-ocid="join.submit_button"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting\u2026
-                  </>
-                ) : (
-                  "Submit Application"
-                )}
-              </Button>
-            </form>
-          )}
+            <a
+              href={DISCORD_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl font-semibold text-white text-base transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{
+                background: "linear-gradient(135deg, #5865F2, #7289da)",
+                boxShadow: "0 4px 16px rgba(88,101,242,0.35)",
+              }}
+            >
+              <DiscordIcon size={20} />
+              Join Discord Server
+            </a>
+          </div>
         </SectionReveal>
       </div>
     </main>

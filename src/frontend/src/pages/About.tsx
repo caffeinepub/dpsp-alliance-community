@@ -25,8 +25,12 @@ const pillars = [
 ];
 
 const leaders = [
-  { role: "Founder", name: "Krish Ripper", icon: "👑", delay: 0 },
-  { role: "Co-Founder", name: "Alex Arora", icon: "🤝", delay: 0.15 },
+  { role: "Founder", name: "Feroze", icon: "🚩", delay: 0 },
+  { role: "Founder", name: "Krish Ripper", icon: "🚩", delay: 0.1 },
+  { role: "Founder", name: "Alex Arora", icon: "🚩", delay: 0.2 },
+  { role: "Co-Founder", name: "Akarsh Pandey", icon: "🏴", delay: 0.3 },
+  { role: "Co-Founder", name: "Michael Kesari", icon: "🏴", delay: 0.4 },
+  { role: "Co-Founder", name: "Sheikh Escobar", icon: "🏴", delay: 0.5 },
 ];
 
 const lightCardStyle = {
@@ -36,9 +40,9 @@ const lightCardStyle = {
 
 export default function About() {
   return (
-    <main className="min-h-screen pt-20 animate-page-enter">
-      {/* Dark page hero */}
-      <div className="relative py-24 px-6 text-center overflow-hidden">
+    <main className="min-h-screen animate-page-enter">
+      {/* Dark page hero — starts at top:0, behind navbar */}
+      <div className="relative pt-32 pb-24 px-6 text-center overflow-hidden">
         <div className="aurora-bg">
           <div className="animated-mesh-bg absolute inset-0" />
           <div className="aurora-blob aurora-blob-1" />
@@ -199,22 +203,111 @@ export default function About() {
         </SectionReveal>
       </section>
 
-      {/* Leadership — light */}
-      <section className="py-20 px-6" style={{ background: "#f8fafc" }}>
-        <div className="max-w-4xl mx-auto">
-          <SectionReveal className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#2563eb] mb-3">
-              The Team
+      {/* Leadership — Royal Theme */}
+      <section
+        className="py-24 px-6 relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(160deg, #0a0f1e 0%, #0f172a 50%, #0a0d1a 100%)",
+        }}
+      >
+        {/* Subtle gold radial glow in background */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.06) 0%, transparent 60%)",
+          }}
+        />
+        {/* Decorative corner ornaments */}
+        <div
+          className="absolute top-8 left-8 w-16 h-16 pointer-events-none opacity-20"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(255,215,0,0.6) 0%, transparent 60%)",
+            borderTop: "2px solid rgba(255,215,0,0.5)",
+            borderLeft: "2px solid rgba(255,215,0,0.5)",
+            borderRadius: "4px 0 0 0",
+          }}
+        />
+        <div
+          className="absolute top-8 right-8 w-16 h-16 pointer-events-none opacity-20"
+          style={{
+            background:
+              "linear-gradient(225deg, rgba(255,215,0,0.6) 0%, transparent 60%)",
+            borderTop: "2px solid rgba(255,215,0,0.5)",
+            borderRight: "2px solid rgba(255,215,0,0.5)",
+            borderRadius: "0 4px 0 0",
+          }}
+        />
+        <div
+          className="absolute bottom-8 left-8 w-16 h-16 pointer-events-none opacity-20"
+          style={{
+            background:
+              "linear-gradient(45deg, rgba(255,215,0,0.6) 0%, transparent 60%)",
+            borderBottom: "2px solid rgba(255,215,0,0.5)",
+            borderLeft: "2px solid rgba(255,215,0,0.5)",
+            borderRadius: "0 0 0 4px",
+          }}
+        />
+        <div
+          className="absolute bottom-8 right-8 w-16 h-16 pointer-events-none opacity-20"
+          style={{
+            background:
+              "linear-gradient(315deg, rgba(255,215,0,0.6) 0%, transparent 60%)",
+            borderBottom: "2px solid rgba(255,215,0,0.5)",
+            borderRight: "2px solid rgba(255,215,0,0.5)",
+            borderRadius: "0 0 4px 0",
+          }}
+        />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+          <SectionReveal className="text-center mb-14">
+            <p
+              className="text-xs font-semibold tracking-[0.3em] uppercase mb-4"
+              style={{ color: "#FFD700" }}
+            >
+              ✦ The Team ✦
             </p>
             <h2
-              className="text-3xl font-bold text-[#0f172a] section-heading-center"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              className="text-3xl sm:text-4xl font-black uppercase mb-5"
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: "#FFD700",
+                textShadow: "0 0 30px rgba(255,215,0,0.3)",
+              }}
             >
               Our Leadership
             </h2>
+            {/* Gold shimmer divider */}
+            <div className="flex items-center justify-center gap-3">
+              <div
+                style={{
+                  height: "1px",
+                  width: "60px",
+                  background: "linear-gradient(to right, transparent, #FFD700)",
+                }}
+              />
+              <div
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  background: "#FFD700",
+                  transform: "rotate(45deg)",
+                  boxShadow: "0 0 8px rgba(255,215,0,0.8)",
+                }}
+              />
+              <div
+                style={{
+                  height: "1px",
+                  width: "60px",
+                  background: "linear-gradient(to left, transparent, #FFD700)",
+                }}
+              />
+            </div>
           </SectionReveal>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {leaders.map((leader) => (
               <motion.div
                 key={leader.name}
@@ -235,32 +328,45 @@ export default function About() {
                     ease: "easeInOut",
                     delay: leader.delay + 1,
                   }}
-                  className="rounded-2xl p-8 text-center cursor-default
-                    hover:shadow-[0_8px_30px_rgba(37,99,235,0.12)] transition-all duration-300"
-                  style={lightCardStyle}
+                  className="rounded-2xl p-8 text-center cursor-default transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,215,0,0.2)",
+                  }}
+                  whileHover={{
+                    boxShadow:
+                      "0 0 32px rgba(255,215,0,0.25), 0 8px 32px rgba(0,0,0,0.4)",
+                    borderColor: "rgba(255,215,0,0.45)",
+                    y: -4,
+                  }}
                 >
                   <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5"
                     style={{
-                      background: "#dbeafe",
-                      border: "1px solid #bfdbfe",
+                      background: "linear-gradient(135deg, #B8860B, #FFD700)",
+                      boxShadow: "0 4px 16px rgba(255,215,0,0.35)",
                     }}
                   >
                     {leader.icon}
                   </div>
                   <span
-                    className="inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-3"
+                    className="inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
                     style={{
-                      background: "#dbeafe",
-                      color: "#2563eb",
-                      border: "1px solid #bfdbfe",
+                      background: "rgba(255,215,0,0.1)",
+                      color: "#FFD700",
+                      border: "1px solid rgba(255,215,0,0.35)",
                     }}
                   >
                     {leader.role}
                   </span>
                   <h3
-                    className="text-xl font-bold text-[#0f172a]"
-                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="text-xl font-bold text-white"
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      textShadow: "0 1px 8px rgba(255,215,0,0.15)",
+                    }}
                   >
                     {leader.name}
                   </h3>

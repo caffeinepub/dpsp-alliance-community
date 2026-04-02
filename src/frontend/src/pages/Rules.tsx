@@ -56,9 +56,9 @@ const ruleSections = [
 
 export default function Rules() {
   return (
-    <main className="min-h-screen pt-20 animate-page-enter">
-      {/* Dark header */}
-      <div className="relative py-20 px-6 text-center overflow-hidden">
+    <main className="min-h-screen animate-page-enter">
+      {/* Dark header — starts at top, behind navbar */}
+      <div className="relative pt-28 pb-20 px-6 text-center overflow-hidden">
         <div className="aurora-bg">
           <div className="animated-mesh-bg absolute inset-0" />
           <div className="aurora-blob aurora-blob-1" />

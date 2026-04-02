@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Events from "./pages/Events";
+import FamilyPage from "./pages/FamilyPage";
 import Home from "./pages/Home";
 import JoinUs from "./pages/JoinUs";
 import Media from "./pages/Media";
@@ -102,6 +103,11 @@ const termsRoute = createRoute({
   path: "/terms",
   component: () => <PlaceholderPage title="Terms of Service" />,
 });
+const familyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/family/$tag",
+  component: FamilyPage,
+});
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -114,6 +120,7 @@ const routeTree = rootRoute.addChildren([
   contactRoute,
   privacyRoute,
   termsRoute,
+  familyRoute,
 ]);
 
 const router = createRouter({ routeTree });

@@ -52,9 +52,9 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen pt-20 animate-page-enter">
-      {/* Dark header */}
-      <div className="relative py-20 px-6 text-center overflow-hidden">
+    <main className="min-h-screen animate-page-enter">
+      {/* Dark header — starts at top, behind navbar */}
+      <div className="relative pt-28 pb-20 px-6 text-center overflow-hidden">
         <div className="aurora-bg">
           <div className="animated-mesh-bg absolute inset-0" />
           <div className="aurora-blob aurora-blob-1" />
@@ -176,7 +176,7 @@ export default function Contact() {
                 <Textarea
                   value={form.message}
                   onChange={update("message")}
-                  placeholder="Write your message here\u2026"
+                  placeholder="Write your message here…"
                   rows={5}
                   className="bg-white border-[#e2e8f0] text-[#0f172a] placeholder:text-[#94a3b8] focus:border-[#2563eb] resize-none"
                   data-ocid="contact.textarea"
@@ -196,7 +196,7 @@ export default function Contact() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending\u2026
+                    Sending…
                   </>
                 ) : (
                   "Send Message"
