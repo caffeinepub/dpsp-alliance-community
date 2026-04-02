@@ -25,12 +25,12 @@ const pillars = [
 ];
 
 const leaders = [
-  { role: "Founder", name: "Feroze", icon: "🚩", delay: 0 },
-  { role: "Founder", name: "Krish Ripper", icon: "🚩", delay: 0.1 },
-  { role: "Founder", name: "Alex Arora", icon: "🚩", delay: 0.2 },
-  { role: "Co-Founder", name: "Akarsh Pandey", icon: "🏴", delay: 0.3 },
-  { role: "Co-Founder", name: "Michael Kesari", icon: "🏴", delay: 0.4 },
-  { role: "Co-Founder", name: "Sheikh Escobar", icon: "🏴", delay: 0.5 },
+  { role: "Founder", name: "Feroze", delay: 0 },
+  { role: "Founder", name: "Krish Ripper", delay: 0.1 },
+  { role: "Founder", name: "Alex Arora", delay: 0.2 },
+  { role: "Co-Founder", name: "Akarsh Pandey", delay: 0.3 },
+  { role: "Co-Founder", name: "Michael Kesari", delay: 0.4 },
+  { role: "Co-Founder", name: "Sheikh Escobar", delay: 0.5 },
 ];
 
 const lightCardStyle = {
@@ -342,14 +342,17 @@ export default function About() {
                     y: -4,
                   }}
                 >
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5"
-                    style={{
-                      background: "linear-gradient(135deg, #B8860B, #FFD700)",
-                      boxShadow: "0 4px 16px rgba(255,215,0,0.35)",
-                    }}
-                  >
-                    {leader.icon}
+                  {/* Gold diamond accent instead of emoji */}
+                  <div className="flex items-center justify-center mb-5">
+                    <div
+                      style={{
+                        width: "14px",
+                        height: "14px",
+                        background: "linear-gradient(135deg, #B8860B, #FFD700)",
+                        transform: "rotate(45deg)",
+                        boxShadow: "0 0 12px rgba(255,215,0,0.6)",
+                      }}
+                    />
                   </div>
                   <span
                     className="inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
